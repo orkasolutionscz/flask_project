@@ -1,29 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Vítejte na Makrdown blogu</title>
-    <link rel="stylesheet" href={{ url_for("static", filename="css/main.css")}}>
-</head>
-<body>
-<header>
-    <h1>Jiri Fait</h1>
-</header>
-<nav>
-    <ul class="nav">
-        <li><a href="#">About</a></li>
-        <li><a href="#">Article</a></li>
-        <li><a href="#">Admin</a></li>
-    </ul>
-</nav>
+{% extends "_main.jinja" %}
 
-<main>
-{{ text }}
-</main>
-<footer>
-    <p>
-        (c) 2021 Jiri Fait
-    </p>
-</footer>
-</body>
-</html>
+{% block title %} Vitejte na Blogu Jirky Fait {% endblock %}
+
+{% block main %}
+If prompted, log in to your My VMware profile. ... If you do not have a profile, you must create one. ... After completion, an activation email is delivered to your inbox. ... Navigate to the activ...
+{% endblock %}
