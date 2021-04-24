@@ -1,5 +1,4 @@
 /venv
-.vagrant/
 
 ### Python template
 # Byte-compiled / optimized / DLL files
@@ -8,3 +7,4 @@ __pycache__/
 *$py.class
 
 .idea/
+/.vagrant/
