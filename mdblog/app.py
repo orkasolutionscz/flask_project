@@ -9,6 +9,7 @@ from flask import redirect
 from flask import url_for
 from flask import session
 from flask import g
+from flask import flash
 
 
 flask_app = Flask(__name__)
@@ -32,6 +33,7 @@ def view_about_page():
 @flask_app.route("/admin/")
 def view_admin_page():
     if "logged" not in session:
+        flash("Musis byt prihlaseny", "alert-danger")
         return redirect(url_for("view_login"))
     return render_template("admin_page.jinja")
 
@@ -50,6 +52,7 @@ def add_articles():
     cur = db.execute("insert into articles (title, content) values (?,?)",
                      [request.form.get("title"), request.form.get("content")])
     db.commit()
+    flash("Prispevek uspesne pridan", "alert-success")
     return redirect(url_for("view_articles_page"))
 
 
@@ -75,15 +78,17 @@ def login_user():
     if username == flask_app.config["USERNAME"] and \
             password == flask_app.config["PASSWORD"]:
         session["logged"] = True
-        print(username, password, session["logged"])
+        flash("Uspesne prihlaseni", "alert-success")
         return redirect(url_for("view_admin_page"))
     else:
+        flash("Nespravne prihlasovaci udaje", "alert-danger")
         return redirect(url_for("view_login"))
 
 
 @flask_app.route("/logout/", methods=["POST"])
 def logout_user():
     session.pop("logged")
+    flash("Byl jsi uspesne odhlasen", "alert-success")
     return redirect(url_for("view_welcome_page"))
 
 

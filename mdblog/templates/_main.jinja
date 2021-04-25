@@ -5,10 +5,21 @@
     <title> {% block title %} {% endblock %}</title>
     {% include "_head.jinja" %}
 </head>
+
+{% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+        <ul class="flashes">
+        {% for category, message in messages %}
+            <li class="{{ category }}"> {{ message }}</li>
+        {% endfor %}
+    {% endif %}
+</ul>
+{% endwith %}
+
 <body>
 
 <header>
-    <h1><a href="{{ url_for("view_welcome_page")}}">Jiri Fait</a> </h1>
+    <h1><a href="{{ url_for("view_welcome_page") }}">Jiri Fait</a></h1>
 </header>
 
 {% include "_nav.jinja" %}
