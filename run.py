@@ -5,7 +5,7 @@ import sys
 
 
 def start():
-    debug = False
+    debug = True
     host = "0.0.0.0"
     flask_app.run(host, debug=debug)
 

@@ -61,8 +61,10 @@ def view_article_editor(art_id):
         form = ArticleForm()
         form.title.data = article.title
         form.content.data = article.content
-        return render_template("mod_admin/article_editor.jinja", form=form, article=article)
-    return render_template("mod_blog/article_not_found.jinja", art_id=art_id)
+        return render_template("mod_admin/article_editor.jinja",
+                               form=form, article=article)
+    return render_template("mod_blog/article_not_found.jinja",
+                           art_id=art_id)
 
 
 @admin.route("/article/<int:art_id>/", methods=["POST"])
