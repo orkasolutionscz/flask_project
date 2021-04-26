@@ -6,33 +6,12 @@ from flask import url_for
 from flask import session
 from flask import flash
 
-from flask_wtf import FlaskForm
-
-from wtforms import StringField
-from wtforms import PasswordField
-from wtforms import TextAreaField
-from wtforms.validators import InputRequired
+from .forms import ArticleForm, LoginForm, ChangePasswordForm
 
 from mdblog.models import db
 from mdblog.models import Article, User
 
 admin = Blueprint("admin", __name__)
-
-
-## FORMS
-class LoginForm(FlaskForm):
-    username = StringField("Username", validators=[InputRequired()])
-    password = PasswordField("Password", validators=[InputRequired()])
-
-
-class ChangePasswordForm(FlaskForm):
-    old_password = PasswordField("Old Password", validators=[InputRequired()])
-    new_password = PasswordField("New Password", validators=[InputRequired()])
-
-
-class ArticleForm(FlaskForm):
-    title = StringField("Title", validators=[InputRequired()])
-    content = TextAreaField("Content", validators=[InputRequired()])
 
 
 @admin.route("/admin/")
