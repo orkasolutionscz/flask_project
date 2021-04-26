@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm
-
 from wtforms import StringField
 from wtforms import PasswordField
 from wtforms import TextAreaField
+from wtforms import HiddenField
 from wtforms.validators import InputRequired
 
 
@@ -19,5 +19,6 @@ class ChangePasswordForm(FlaskForm):
 class ArticleForm(FlaskForm):
     title = StringField("Title", validators=[InputRequired()])
     content = TextAreaField("Content", validators=[InputRequired()])
+    html_render = HiddenField()
 
 
