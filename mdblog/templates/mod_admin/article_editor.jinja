@@ -1,6 +1,12 @@
 {% extends "_main.jinja" %}
 
 {% block title %} New Article {% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href={{url_for("static", filename="css/simplemde.min.css")}}>
+    <script src={{url_for("static", filename="js/simplemde.min.js")}}></script>
+    <script src={{url_for("static", filename="js/editor.js")}}></script>
+{% endblock %}
 
 {% block main %}
 
