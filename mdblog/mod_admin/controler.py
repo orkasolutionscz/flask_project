@@ -54,8 +54,13 @@ def add_article():
         db.session.commit()
         flash("Article was saved", "alert-success")
 
+        ## Potrebujeme url noveho clanku
+        blog_url = url_for("blog.view_article", art_id=new_article.id)
+        article_url = request.url_root + blog_url[1:]
+
+
         ## Pridame do celery uloh
-        notify_newsletter.delay()
+        notify_newsletter.delay(article_url)
 
         return redirect(url_for("blog.view_articles"))
     else:
