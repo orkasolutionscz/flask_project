@@ -1,6 +1,7 @@
 from mdblog import celery
 from mdblog.models import Newsletter
-from time import sleep
+
+from flask import current_app
 
 from celery.utils.log import get_task_logger
 
@@ -16,8 +17,11 @@ def notify_newsletter(url):
     logger.info("number of subscribers: {:03d}".format(len(subscribers)))
     for subscriber in subscribers:
         logger.info("Sending email to {}".format(subscriber.email))
-        send_email("salon.pesvice@gmail.com",
-                   "eQKMAt96sl2@",
+        # vytazeni username a password z app configu
+        username = current_app.config.get("EMAIL_USERNAME")
+        password = current_app.config.get("EMAIL_PASSWORD")
+        send_email(username,
+                   password,
                    subscriber.email,
                    url)
 
