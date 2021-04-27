@@ -9,3 +9,6 @@ __pycache__/
 
 .idea/
 /.vagrant/
+/dist
+/markdown_blog.egg-info
+
