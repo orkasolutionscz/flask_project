@@ -7,6 +7,10 @@ from .mod_main import main
 from .mod_blog import blog
 from .mod_admin import admin
 
+from .mod_main.forms import NewsletterForm
+
+from mdblog import celery
+from mdblog.celery_utils import make_celery
 
 
 def create_flask_app():
@@ -23,6 +27,10 @@ def create_flask_app():
     flask_app.register_blueprint(blog)
     flask_app.register_blueprint(admin, url_prefix="/admin")
 
+    ## INIT CELERY
+    celery_app = make_celery(celery, flask_app)
+
+    ## Error handlig
     @flask_app.errorhandler(500)
     def internal_server_error(error):
         return render_template("errors/500.jinja"), 500
@@ -31,4 +39,9 @@ def create_flask_app():
     def internal_server_error(error):
         return render_template("errors/404.jinja"), 404
 
-    return flask_app
+    ## FLASK CONTEXT PROCESSOR
+    @flask_app.context_processor
+    def inject_newsletter_form():
+        return dict(newsletter_form=NewsletterForm())
+
+    return flask_app, celery_app

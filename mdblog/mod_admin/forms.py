@@ -18,7 +18,7 @@ class ChangePasswordForm(FlaskForm):
 
 class ArticleForm(FlaskForm):
     title = StringField("Title", validators=[InputRequired()])
-    content = TextAreaField("Content", validators=[InputRequired()])
+    content = TextAreaField("Content")
     html_render = HiddenField()
 
 
